@@ -28,3 +28,29 @@ This approach does not use Python bindings or `cgo`. Instead, it treats Go as a 
  - say we got a large dataset of structured data, either stored in a database or file
  - we want to leverage go's concurrency and parallelism to perform full-text search or maybe analyze something
 
+### Usage Example
+```python
+from PyGo import PyGo, detect_go_platform
+
+# you can set this manually
+binary_path : str = f'go-binaries/{detect_go_platform()}/cli-app'
+
+# the data you want to send to your go binary
+go_data : dict = {
+    "name": "Alex",
+    "age": 29
+}
+
+# call the class
+pygo : PyGo = PyGo(executable_file_path=binary_path)
+
+# send your data
+pygo.send(go_data)
+
+# receive your data
+result = pygo.receive()
+if result is None:
+    print("Error:", pygo.get_error())
+else:
+    print("Output from Go executable:", result)
+```
