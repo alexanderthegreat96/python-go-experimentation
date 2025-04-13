@@ -6,7 +6,7 @@ go_data : dict = {
     "age": 29
 }
 
-pygo : PyGo = PyGo(executable_file_path=binary_path)
+pygo : PyGo = PyGo(executable_file_path=binary_path, use_encoding=True)
 pygo.send(go_data)
     
 result = pygo.receive()
